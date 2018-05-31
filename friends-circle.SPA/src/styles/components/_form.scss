@@ -1,0 +1,45 @@
+.form-control {
+  padding: 1rem 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+}
+
+.form-check-label {
+  color: $gray-600;
+}
+
+.form-wrapper {
+  .form-check {
+    margin: 0;
+  }
+  legend {
+    margin: 0 0 50px 0;
+    font-weight: 100;
+    font-size: 2rem;
+  }
+  .btn-primary,
+  .btn-outline-secondary {
+    min-width: 130px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .btn-primary {
+    border-color: #ffffff;
+    background: #ffffff;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 0px;
+    letter-spacing: 2px;
+    color: #cc7256;
+  }
+  .btn-outline-secondary {
+    border-color: $gray-400;
+    &:hover {
+      border-color: $gray-600;
+      background: none;
+      color: $gray-700;
+    }
+  }
+}

@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+
+@import "node_modules/bootstrap/scss/functions";
+
+@import "variables";
+
+@import "node_modules/bootstrap/scss/mixins";
+// @import "node_modules/bootstrap/scss/print";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+// @import "node_modules/bootstrap/scss/images";
+// @import "node_modules/bootstrap/scss/code";
+@import "node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/tables";
+@import "node_modules/bootstrap/scss/forms";
+@import "node_modules/bootstrap/scss/buttons";
+@import "node_modules/bootstrap/scss/transitions";
+@import "node_modules/bootstrap/scss/dropdown";
+@import "node_modules/bootstrap/scss/button-group";
+@import "node_modules/bootstrap/scss/input-group";
+@import "node_modules/bootstrap/scss/custom-forms";
+// @import "node_modules/bootstrap/scss/nav";
+// @import "node_modules/bootstrap/scss/navbar";
+// @import "node_modules/bootstrap/scss/card";
+// @import "node_modules/bootstrap/scss/breadcrumb";
+// @import "node_modules/bootstrap/scss/pagination";
+// @import "node_modules/bootstrap/scss/badge";
+// @import "node_modules/bootstrap/scss/jumbotron";
+// @import "node_modules/bootstrap/scss/alert";
+// @import "node_modules/bootstrap/scss/progress";
+// @import "node_modules/bootstrap/scss/media";
+// @import "node_modules/bootstrap/scss/list-group";
+// @import "node_modules/bootstrap/scss/close";
+// @import "node_modules/bootstrap/scss/modal";
+// @import "node_modules/bootstrap/scss/tooltip";
+// @import "node_modules/bootstrap/scss/popover";
+// @import "node_modules/bootstrap/scss/carousel";
+@import "node_modules/bootstrap/scss/utilities";
+
+@import "material-theme";
+
+@import "common";
+@import "components/form";
+//
+
+$main-text-color: #38a899;
+$secondary-text-color: #404764;
+$light-gray-color: #f1f1f5;
+$green-color: #a0c94b;
+$main-green-color: #9fc949;
+
+.white {
+    background: white;
+}
+
+.mt-30px {
+    margin-top: 30px;
+}
+
+.spaced-row-30px {
+    .col {
+        min-height: 272px;
+    }
+
+    .col:first-child {
+        margin-right: 15px;
+    }
+
+    .col + .col {
+        margin-left: 15px;
+    }
+}
+
+.green {
+  color: $green-color;
+}
+
+.super-light-gray {
+  color: transparentize($secondary-text-color, 0.6);
+}
+
+.top-text-small {
+  margin-top: 60px;
+
+  img {
+    width: 130px;
+  }
+}
+
+.margin-v-auto {
+  margin: auto 0;
+}
+
+.form-icon {
+  width: 44px;
+  height: 48px;
+  margin-bottom: 50px;
+}
+
+.application-container {
+  background: #f6f7fb;
+}
+
+.logo-text {
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #c36663;
+}
+
+.register-form {
+  background: $alternative-gradient;
+  padding: 20px;
+  color: white;
+
+  .mat-form-field {
+    width: 100%;
+  }
+}
+
+.mirror-horizontal {
+  transform: rotate(180deg);
+}
+
+.va-sub {
+  vertical-align: sub;
+}
+
+.content-right {
+    background-size: cover;
+    background: $main-gradient;
+  
+    &-main {
+      text-align: center;
+      &__button {
+        width: 420px;
+        height: 420px;
+        border: 6px solid white;
+        border-radius: 50%;
+        background: url(../assets/images/friends.jpg) no-repeat center center;
+        display: inline-block;
+      }
+
+      &__caption {
+        color: #fff;
+        font-weight: 100;
+        font-size: 64px;
+        padding: 60px 0 0 0;
+      }
+    }
+  }
+  
+.social-feed-card {
+  background: linear-gradient(to bottom, #c36565, #d78445);
+  padding: 20px;
+  color: white;
+}
+
+.social-feed-avatar {
+  mat-icon {
+    font-size: 40px;
+    line-height: 48px;
+  }
+}

@@ -1,0 +1,42 @@
+<div class="row no-gutters vh-100">
+  <div class="col form-wrapper d-flex flex-column">
+      <div class="row h-100">
+          <div class="hero-background"></div>
+          <div class="col-lg-8 offset-2 d-flex flex-column">
+              <div class="top-text-small">
+                  <a href="#" class="logo-text">
+                    REGISTER
+                  </a>
+              </div>
+              <form class="register-form margin-v-auto">
+                  <fieldset>
+                      <legend>Login</legend>
+
+                      <mat-form-field >
+                          <input matInput placeholder="E-mail" [(ngModel)]="model.email" name="email">
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <input matInput placeholder="Password" [(ngModel)]="model.password" name="password" type="password">
+                      </mat-form-field>
+                  
+                      <div class="row align-items-center">                    
+                          <div class="col text-right">
+                              <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+                          </div>
+                      </div>
+                  
+                  </fieldset>
+              </form>
+          </div>
+      </div>
+  </div>
+  <div class="col d-flex flex-column justify-content-center content-right">
+      <div class="content-right-main">
+          <div class="content-right-main__button">
+              <i class="fa fa-user-circle" aria-hidden="true"></i>                
+          </div>
+          <p class="content-right-main__caption">FRIENDS' CIRCLE</p>
+      </div>
+  </div>
+</div>

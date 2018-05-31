@@ -1,0 +1,14 @@
+@import "node_modules/bootstrap/scss/variables";
+
+// override bootstrap variables
+$enable-rounded: false;
+
+$input-placeholder-color: $gray-400;
+$input-border-color: $gray-400;
+$input-focus-border-color: lighten($green, 25%);
+
+// custom variables
+$transition-delay: 0.3s;
+
+$main-gradient: linear-gradient(to bottom, #c36565, #ffc107);
+$alternative-gradient: linear-gradient(to bottom, #c36565, #d78445);
