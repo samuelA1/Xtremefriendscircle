@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-social-feed',
@@ -6,14 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./social-feed.component.scss']
 })
 export class SocialFeedComponent implements OnInit {
+  currentUser;
 
-  constructor() { }
+  constructor(private _auth: AuthService) { }
 
-  ngOnInit() {
+ async ngOnInit() {
+  try {
+    const data = await this._auth.getLoggedInUser();
+    this.currentUser = Object.assign({}, {
+      fullName : `${data['firstName']} ${data['lastName']}`
+    })
+  } catch (error) {
+    console.log(error)
+  }
   }
 
   addEntry(entry) {
     alert(entry.content);
   }
-
 }

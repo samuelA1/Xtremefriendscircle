@@ -3,6 +3,11 @@
       <div class="row h-100">
           <div class="hero-background"></div>
           <div class="col-lg-8 offset-2 d-flex flex-column">
+              <div class="row mt-4" *ngIf="currentUser">
+                <div class="col">
+                  Logged in as: {{currentUser.fullName}}
+                </div>
+              </div>
               <div class="top-text-small">
                   <div class="logo-text">
                     SOCIAL FEED
@@ -29,7 +34,7 @@
   <div class="col d-flex flex-column justify-content-center content-right">
       <div class="content-right-main">
           <div class="content-right-main__button">
-              <i class="fa fa-user-circle" aria-hidden="true"></i>                
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
           </div>
           <p class="content-right-main__caption">FRIENDS' CIRCLE</p>
       </div>

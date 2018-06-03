@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public model : User
+  public model : any = {};
 
   constructor(private _auth : AuthService) { }
 
@@ -16,7 +16,12 @@ export class RegisterComponent implements OnInit {
     this.model = new User();
   }
 
-  submitHandler() {
-    this._auth.register(this.model);
+  async submitHandler() {
+    const data = await this._auth.register(this.model);
+    if(data['success']) {
+      console.log('success')
+    } else {
+      console.log('failed')
+    }
   }
 }
