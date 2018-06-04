@@ -17,6 +17,7 @@ import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { SocialFeedComponent } from './social-feed/social-feed.component';
 import { AddEntryComponent } from './add-entry/add-entry.component';
+import { NetworkService } from './_services/network.service';
 
 const appRoutes : Routes = [
   {
@@ -61,7 +62,8 @@ const appRoutes : Routes = [
     MatButtonModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    NetworkService
   ],
   bootstrap: [AppComponent]
 })

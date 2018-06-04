@@ -20,3 +20,6 @@ Route::group([
     Route::post('/login', 'AuthController@login');
     Route::get('/me', 'AuthController@me');
 });
+
+Route::apiResource('/posts', 'PostController');
+Route::apiResource('/users', 'UserController');

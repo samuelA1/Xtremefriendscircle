@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { NetworkService } from '../_services/network.service';
 
 @Component({
   selector: 'app-social-feed',
@@ -8,8 +9,9 @@ import { AuthService } from '../auth.service';
 })
 export class SocialFeedComponent implements OnInit {
   currentUser;
+  posts: any = [];
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService, private _network: NetworkService) { }
 
  async ngOnInit() {
   try {
@@ -17,12 +19,21 @@ export class SocialFeedComponent implements OnInit {
     this.currentUser = Object.assign({}, {
       fullName : `${data['firstName']} ${data['lastName']}`
     })
-  } catch (error) {
+    } catch (error) {
     console.log(error)
-  }
-  }
+    }
 
-  addEntry(entry) {
-    alert(entry.content);
-  }
+    const posts = await this._network.getAllPosts();
+    this.posts = posts;
+
+    this.addEntry = this.addEntry.bind(this)
+}
+
+async addEntry(entry) {
+  this.posts.push({content: entry.content, author: this.currentUser.fullName, created:{date:Date.now()}})
+
+  const data = await this._network.createPost({content: entry.content});
+}
+
+    
 }
