@@ -8,12 +8,12 @@
                     REGISTER
                   </a>
               </div>
-              <form class="register-form margin-v-auto">
+              <form #f="ngForm" class="register-form margin-v-auto">
                   <fieldset>
                       <legend>Login</legend>
 
-                      <mat-form-field >
-                          <input matInput placeholder="E-mail" [(ngModel)]="model.email" name="email">
+                      <mat-form-field>
+                          <input matInput placeholder="E-mail" [(ngModel)]="model.email" name="email" type="email">
                       </mat-form-field>
 
                       <mat-form-field>
@@ -22,7 +22,7 @@
                   
                       <div class="row align-items-center">                    
                           <div class="col text-right">
-                              <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+                              <button [disabled]="!f.valid" type="submit" class="btn btn-primary" (click)="login()">Login</button>
                           </div>
                       </div>
                   

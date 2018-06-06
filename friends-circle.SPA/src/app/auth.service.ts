@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from '../entities/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
@@ -16,11 +15,11 @@ export class AuthService {
     return token ? new HttpHeaders().set('Authorization', 'Bearer ' + token) : null;
 }
 
-  register(user : User) {
+  register(user : any) {
     return this._http.post(this.baseUrl + '/auth/register', user).toPromise();
   }
 
-  login(user : User) {
+  login(user : any) {
     return this._http.post(this.baseUrl + '/auth/login', user).toPromise();
   }
 

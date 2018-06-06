@@ -20,6 +20,7 @@ import { AddEntryComponent } from './add-entry/add-entry.component';
 import { NetworkService } from './_services/network.service';
 import { UserFriendsComponent } from './user-friends/user-friends.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AlertifyService } from './_services/alertify.service';
 
 const appRoutes : Routes = [
   {
@@ -73,7 +74,8 @@ const appRoutes : Routes = [
   providers: [
     AuthService,
     NetworkService,
-    AuthGuard
+    AuthGuard,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })

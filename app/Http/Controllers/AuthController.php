@@ -11,7 +11,7 @@ use App\User;
 class AuthController extends Controller
 {
     public function _constructor() {
-        $this->middleware('auth:api', ['except' => ['register','login']]);
+        $this->middleware('auth:api', ['except' => ['register','login', 'respondWithToken', 'guard']]);
     }
 
     public function register(Request $request) {
@@ -41,7 +41,10 @@ class AuthController extends Controller
             'password' => Hash::make($password)
         ]);
 
-        return response()->json(['success' => true, 'user' => $user]);
+        $input = $request->only('email', 'password');
+        if($token = $this->guard()->attempt($input)) {
+            return $this->respondWithToken($token);
+        }
     }
 
     public function login(Request $request) {
@@ -62,7 +65,7 @@ class AuthController extends Controller
             'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => $this->guard()->factory()->getTTL() * 60 * 24 * 3
+            'expires_in' => $this->guard()->factory()->getTTL() * 60 * 60
 
         ]);
     }

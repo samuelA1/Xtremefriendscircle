@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../entities/User';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-login',
@@ -10,20 +10,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   public model : any = {}
+  user: any;
 
-  constructor(private _auth : AuthService, private _router: Router) { }
+  constructor(private _auth : AuthService,
+     private _router: Router,
+     private _alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.model = new User();
+    
   }
 
   async login() {
     try {
       const data = await this._auth.login(this.model);
       data['success'] ? (localStorage.setItem('token', data['access_token']),
-      console.log('success'), this._router.navigate(['/feed'])) : console.log('Failure');
+      this._alertify.success('Login successful'), 
+      this._router.navigate(['/feed'])
+    )
+       : this._alertify.error('Failed to login');
+  
     } catch (error) {
-      console.log(error);
+      this._alertify.error(error['message']);
     }
   }
 

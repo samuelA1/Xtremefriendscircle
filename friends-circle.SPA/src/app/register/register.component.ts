@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../entities/User';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -11,19 +11,22 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   public model : any = {};
 
-  constructor(private _auth : AuthService, private _router: Router) { }
+  constructor(private _auth : AuthService,
+     private _router: Router,
+     private _alertify: AlertifyService) { }
 
   ngOnInit() {
-    this.model = new User();
   }
 
   async submitHandler() {
     const data = await this._auth.register(this.model);
     if(data['success']) {
+      localStorage.setItem('token', data['access_token']);
       this._router.navigate(['/feed']);
       this._auth.getLoggedInUser();
+      this._alertify.success('Registration successful');
     } else {
-      console.log('failed')
+      this._alertify.error('Registration unsuccessful');
     }
   }
 }
