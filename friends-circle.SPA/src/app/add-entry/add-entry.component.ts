@@ -11,7 +11,8 @@ export class AddEntryComponent implements OnInit {
   @Input() onClick
 
   model = {
-    content: ''
+    content: '',
+    visibility: 100
   }
 
 
@@ -20,4 +21,15 @@ export class AddEntryComponent implements OnInit {
   ngOnInit() {
   }
 
+  sharePublicly() {
+    this.model.visibility = 100;
+
+    this.onClick(this.model);
+  }
+
+  shareForFriends() {
+    this.model.visibility = 200;
+
+    this.onClick(this.model);
+  }
 }

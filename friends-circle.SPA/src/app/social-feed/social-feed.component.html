@@ -3,11 +3,21 @@
       <div class="row h-100">
           <div class="hero-background"></div>
           <div class="col-lg-8 offset-2 d-flex flex-column">
+              <div class="top-text-small">
+                  <a routerLink='/users' class="btn btn-warning">
+                    USERS & FRIENDS
+                  </a>
+              </div>
               <div class="row mt-4" *ngIf="currentUser">
                 <div class="col">
                   Logged in as: {{currentUser.fullName}}
                 </div>
               </div>
+              <div class="row mt-4" *ngIf="currentUser">
+                  <div class="col">
+                    <button class="btn btn-secondary cursor-pointer" (click)="logout()">LOGOUT</button>
+                  </div>
+                </div>
               <div class="top-text-small">
                   <div class="logo-text">
                     SOCIAL FEED
@@ -20,7 +30,7 @@
                     <mat-icon>face</mat-icon>
                   </div>
                   <mat-card-title>{{post.author}}</mat-card-title>
-                  <mat-card-subtitle>{{post.created.date | date}}</mat-card-subtitle>
+                  <mat-card-subtitle>{{post.created_at | date}}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
                   <p>

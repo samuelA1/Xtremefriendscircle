@@ -18,6 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { SocialFeedComponent } from './social-feed/social-feed.component';
 import { AddEntryComponent } from './add-entry/add-entry.component';
 import { NetworkService } from './_services/network.service';
+import { UserFriendsComponent } from './user-friends/user-friends.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const appRoutes : Routes = [
   {
@@ -30,7 +32,13 @@ const appRoutes : Routes = [
   },
   {
     path: 'feed',
-    component: SocialFeedComponent
+    component: SocialFeedComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'users',
+    component: UserFriendsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -45,8 +53,9 @@ const appRoutes : Routes = [
     RegisterComponent,
     LoginComponent,
     SocialFeedComponent,
-    AddEntryComponent
-  ],
+    AddEntryComponent,
+    UserFriendsComponent
+],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes, {
@@ -63,7 +72,8 @@ const appRoutes : Routes = [
   ],
   providers: [
     AuthService,
-    NetworkService
+    NetworkService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

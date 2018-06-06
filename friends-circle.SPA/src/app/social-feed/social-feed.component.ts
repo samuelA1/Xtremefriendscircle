@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NetworkService } from '../_services/network.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-social-feed',
@@ -11,29 +12,52 @@ export class SocialFeedComponent implements OnInit {
   currentUser;
   posts: any = [];
 
-  constructor(private _auth: AuthService, private _network: NetworkService) { }
+  constructor(private _auth: AuthService, private _network: NetworkService, private _router: Router) { }
 
  async ngOnInit() {
   try {
+    this._auth.token = localStorage.getItem('token');
+
     const data = await this._auth.getLoggedInUser();
+
     this.currentUser = Object.assign({}, {
       fullName : `${data['firstName']} ${data['lastName']}`
-    })
-    } catch (error) {
+    });
+
+    let posts: any = []
+    posts = await this._network.getAllPosts();
+    posts.forEach(element => {
+      this.getUserPost(element.author_id).then(data => {
+        const singlePost = {
+          content: element.content,
+          created_at: element.created_at,
+          author: `${data['firstName']} ${data['lastName']}`
+        }
+        this.posts.push( singlePost);
+      });
+    });
+  } catch (error) {
     console.log(error)
-    }
-
-    const posts = await this._network.getAllPosts();
-    this.posts = posts;
-
+  }
     this.addEntry = this.addEntry.bind(this)
 }
 
-async addEntry(entry) {
-  this.posts.push({content: entry.content, author: this.currentUser.fullName, created:{date:Date.now()}})
-
-  const data = await this._network.createPost({content: entry.content});
+async getUserPost(userId) {
+  const data = await this._auth.getUser(userId);
+  return data
 }
 
+async addEntry(entry) {
+  if (entry.content !== '')
+    this.posts.push({content: entry.content, author: this.currentUser.fullName, created:{date:Date.now()}})
+
+  const data = await this._network.createPost({content: entry.content, visibility: entry.visibility});
+}
+
+logout() {
+  this._auth.logout();
+
+  this._router.navigate(['/login']);
+}
     
 }

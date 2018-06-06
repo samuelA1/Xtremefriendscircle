@@ -21,5 +21,10 @@ Route::group([
     Route::get('/me', 'AuthController@me');
 });
 
+Route::get('/users/friends', 'UserController@friends');
+Route::post('/users/{friend_id}/add_friend', 'UserController@addFriend');
+Route::post('/users/{friend_id}/remove_friend', 'UserController@removeFriend');
+
+
 Route::apiResource('/posts', 'PostController');
 Route::apiResource('/users', 'UserController');

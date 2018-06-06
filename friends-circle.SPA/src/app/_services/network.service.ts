@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 
 @Injectable()
 export class NetworkService {
@@ -18,6 +19,20 @@ export class NetworkService {
 
   createPost(post: any) {
       return this._http.post(this.baseUrl + '/posts', post, {headers: this.getHeaders()}).toPromise();
+  }
+
+  getFriends() {
+    return this._http.get(this.baseUrl + '/users/friends', {headers: this.getHeaders()}).toPromise();
+  }
+
+  addFriend(friendId: any) {
+      return this._http.post(this.baseUrl + '/users/' + friendId + '/add_friend', {},
+       {headers: this.getHeaders()}).toPromise();
+  }
+
+  removeFriend(friendId: any) {
+      return this._http.post(this.baseUrl + '/users/' + friendId + '/remove_friend', {},
+    {headers: this.getHeaders()}).toPromise();
   }
 
 }

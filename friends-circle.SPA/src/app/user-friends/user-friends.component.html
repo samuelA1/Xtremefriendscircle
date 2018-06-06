@@ -1,0 +1,49 @@
+<div class="row no-gutters vh-100">
+    <div class="col form-wrapper d-flex flex-column">
+        <div class="row h-100 overflow-auto">
+            <div class="hero-background"></div>
+            <div class="col-lg-8 offset-2 d-flex flex-column">
+                <div class="top-text-small">
+                    <a routerLink='/feed' class="btn btn-warning">
+                        SOCIAL FEED
+                    </a>
+                </div>
+                <div class="top-text-small">
+                    <div class="logo-text">
+                      USERS & FRIENDS
+                    </div>
+                </div>
+                <table class="table mt-4">
+                  <thead>
+                    <th>Full name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of filteredFriends">
+                      <td>{{user.firstName + ' ' + user.lastName}}</td>
+                      <td>{{user.friend ? 'Friend' : 'Stranger'}}</td>
+                      <td>
+                        <button *ngIf="!user.friend" class="btn btn-secondary cursor-pointer"
+                         (click)="addFriend(user)">Add friend</button>
+                         <button
+                        *ngIf="user.friend"
+                        class="btn btn-danger cursor-pointer"
+                        (click)="removeFriend(user)">Remove friend</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col d-flex flex-column justify-content-center content-right">
+        <div class="content-right-main">
+            <div class="content-right-main__button">
+                <i class="fa fa-user-circle" aria-hidden="true"></i>
+            </div>
+            <p class="content-right-main__caption">FRIENDS' CIRCLE</p>
+        </div>
+    </div>
+  </div>
+  

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../entities/User';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +11,7 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent implements OnInit {
   public model : any = {};
 
-  constructor(private _auth : AuthService) { }
+  constructor(private _auth : AuthService, private _router: Router) { }
 
   ngOnInit() {
     this.model = new User();
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
   async submitHandler() {
     const data = await this._auth.register(this.model);
     if(data['success']) {
-      console.log('success')
+      this._router.navigate(['/feed']);
+      this._auth.getLoggedInUser();
     } else {
       console.log('failed')
     }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -20,13 +22,25 @@ class PostController extends Controller
     {
         
         $results = array();
-        foreach (Post::all() as $post)
-        {
-            $results[] = array('content' => $post->content,
-             'author' => $post->author->firstName .' '. $post->author->lastName, 'created' => $post->created_at);
-        }
-    
-        return response()->json($results);
+        
+        $public = 100;
+        $friendsPost = Auth::user()->friends()
+            ->join('posts', 'posts.author_id', '=', 'users.id')
+            ->orderBy('posts.created_at', 'desc')
+            ->get(['posts.*']);
+        $publicAndOwnPosts = Post::where('visibility', '=', $public)
+            ->orWhere('author_id', Auth::user()->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $posts = $friendsPost->merge($publicAndOwnPosts)->sortByDesc('created_at')
+            ->values()->all();
+
+        // foreach ($posts as $post)
+        // {
+        //     $results[] = array('content' => $post->content,
+        //      'author' => $post->author_id, 'created' => $post->created_at);
+        // }
+        return response()->json($posts);
 
        
     }
